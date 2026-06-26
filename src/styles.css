@@ -1,0 +1,1478 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-cairo: "Cairo", "Tajawal", sans-serif;
+  --font-amiri: "Amiri", serif;
+  --font-tajawal: "Tajawal", sans-serif;
+
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-emerald-950: #022c22;
+
+  --color-gold-100: #fef9c3;
+  --color-gold-200: #fef08a;
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-500: #eab308;
+  --color-gold-600: #ca8a04;
+  --color-gold-700: #a16207;
+  --color-gold-800: #713f12;
+  --color-gold-900: #2a1a00;
+  --color-gold-950: #1a1000;
+
+  --shadow-emerald-glow: 0 0 20px rgba(16,185,129,0.3);
+  --shadow-emerald-glow-lg: 0 0 40px rgba(16,185,129,0.5);
+  --shadow-gold-glow: 0 0 20px rgba(234,179,8,0.3);
+  --shadow-gold-glow-lg: 0 0 40px rgba(234,179,8,0.5);
+  --shadow-glass: 0 8px 32px rgba(0,0,0,0.3);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-spin-slow: spin-slow 20s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(16,185,129,0.3); }
+    50% { box-shadow: 0 0 40px rgba(16,185,129,0.6); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-sidebar: hsl(var(--background));
+  --color-sidebar-foreground: hsl(var(--foreground));
+  --color-sidebar-primary: hsl(var(--primary));
+  --color-sidebar-primary-foreground: hsl(var(--primary-foreground));
+  --color-sidebar-accent: hsl(var(--accent));
+  --color-sidebar-accent-foreground: hsl(var(--accent-foreground));
+  --color-sidebar-border: hsl(var(--border));
+  --color-sidebar-ring: hsl(var(--ring));
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: 0 0% 4%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 6%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 6%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 45 93% 47%;
+  --accent-foreground: 0 0% 4%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 160 84% 39%;
+}
+
+@layer base {
+  * { border-color: hsl(var(--border)); }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #030a06;
+    color: hsl(var(--foreground));
+    font-family: var(--font-cairo);
+    direction: rtl;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0f0a; }
+  ::-webkit-scrollbar-thumb { background: #065f46; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+}
+
+@utility glass {
+  background: rgba(6,20,10,0.82);
+  border: 1px solid rgba(16,185,129,0.15);
+  box-shadow: inset 0 1px 0 rgba(16,185,129,0.08), 0 8px 28px rgba(0,0,0,0.28);
+}
+
+@utility glass-card {
+  background: rgba(6,20,10,0.86);
+  border: 1px solid rgba(16,185,129,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(16,185,129,0.08);
+}
+
+@utility glass-card-gold {
+  background: rgba(10,8,0,0.86);
+  border: 1px solid rgba(234,179,8,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(234,179,8,0.08);
+}
+
+@media (max-width: 640px), (pointer: coarse) {
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  [class*="blur-3xl"],
+  [class*="blur-2xl"],
+  [class*="blur-xl"],
+  [class*="blur-["] {
+    filter: none !important;
+  }
+
+  /* Hide every purely-decorative absolutely-positioned blurred glow
+     layer on mobile. They are the main trigger for Android Chrome's
+     GPU compositor corruption (rainbow stripes / ghosted cards) when
+     stacked under framer-motion animations and a fixed translucent
+     navbar — especially on the /more/* pages whose wrappers contain
+     multiple `blur-[120px]` / `blur-3xl` rounded-full layers. */
+  .absolute[class*="blur"],
+  .pointer-events-none[class*="blur"] {
+    display: none !important;
+  }
+
+  /* Strip inline radial-gradient backdrops on absolute children when
+     they're used as glow layers (e.g. TasbeehPageClient inner glow). */
+  .absolute[style*="radial-gradient"] {
+    background: transparent !important;
+    filter: none !important;
+  }
+
+  /* Isolation only — do NOT use `contain: paint` here because it can
+     block page scrolling on Android Chrome when applied to <main>. */
+  main,
+  section {
+    isolation: isolate;
+  }
+
+}
+
+@utility neon-emerald {
+  box-shadow: 0 0 10px rgba(16,185,129,0.4), 0 0 20px rgba(16,185,129,0.2), 0 0 40px rgba(16,185,129,0.1);
+}
+
+@utility neon-gold {
+  box-shadow: 0 0 10px rgba(234,179,8,0.4), 0 0 20px rgba(234,179,8,0.2), 0 0 40px rgba(234,179,8,0.1);
+}
+
+@utility text-neon-emerald {
+  text-shadow: 0 0 10px rgba(16,185,129,0.8), 0 0 20px rgba(16,185,129,0.4);
+}
+
+@utility text-neon-gold {
+  text-shadow: 0 0 10px rgba(234,179,8,0.8), 0 0 20px rgba(234,179,8,0.4);
+}
+
+@utility quran-text {
+  font-family: var(--font-amiri);
+  line-height: 2.4;
+  letter-spacing: 0.02em;
+}
+
+@utility quran-page {
+  background: linear-gradient(135deg, rgba(6,20,10,0.95) 0%, rgba(2,44,34,0.3) 50%, rgba(6,20,10,0.95) 100%);
+  border: 1px solid rgba(16,185,129,0.08);
+  box-shadow: inset 0 0 60px rgba(16,185,129,0.03);
+}
+
+@utility islamic-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#030a06,#030a06) padding-box,
+    linear-gradient(135deg, rgba(16,185,129,0.4), rgba(234,179,8,0.4), rgba(16,185,129,0.4)) border-box;
+}
+
+@utility gradient-emerald-gold {
+  background: linear-gradient(135deg, #10b981, #eab308);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility bg-islamic-dark {
+  background: radial-gradient(ellipse at top, rgba(6,95,70,0.15) 0%, #030a06 60%);
+}
+
+@utility skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(16,185,129,0.05) 25%, rgba(16,185,129,0.15) 50%, rgba(16,185,129,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@utility font-cairo { font-family: var(--font-cairo); }
+@utility font-amiri { font-family: var(--font-amiri); }
+@utility font-tajawal { font-family: var(--font-tajawal); }
+
+/* ============================================================
+   Theme variants
+   The default theme is the original emerald/gold dark look.
+   Alternate themes remap the most-used hardcoded utility classes
+   (page background + emerald palette + gold accents) so the whole
+   app can be re-skinned without rewriting every component.
+   ============================================================ */
+
+/* Smooth transition between themes */
+html { transition: background-color 0.35s ease; }
+html body,
+html main,
+html nav,
+html [class*="bg-emerald-"],
+html [class*="text-emerald-"],
+html [class*="border-emerald-"],
+html [class*="from-emerald-"],
+html [class*="to-emerald-"],
+html [class*="bg-\\[\\#030a06\\]"] {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+/* --------- FIROUZ (turquoise) --------- */
+html.theme-firouz body { background-color: #04141a !important; color: #e0f7fa; }
+html.theme-firouz .bg-\[\#030a06\] { background-color: #04141a !important; }
+html.theme-firouz .bg-\[\#030a06\]\/95 { background-color: rgb(4 20 26 / 0.95) !important; }
+html.theme-firouz .bg-\[\#030a06\]\/90 { background-color: rgb(4 20 26 / 0.9) !important; }
+html.theme-firouz .bg-\[\#030a06\]\/80 { background-color: rgb(4 20 26 / 0.8) !important; }
+
+html.theme-firouz .text-emerald-300 { color: #5eead4 !important; }
+html.theme-firouz .text-emerald-400 { color: #2dd4bf !important; }
+html.theme-firouz .text-emerald-500 { color: #14b8a6 !important; }
+html.theme-firouz .text-emerald-600 { color: #0d9488 !important; }
+
+html.theme-firouz .bg-emerald-600 { background-color: #0891b2 !important; }
+html.theme-firouz .bg-emerald-700 { background-color: #0e7490 !important; }
+html.theme-firouz .bg-emerald-800 { background-color: #155e75 !important; }
+html.theme-firouz .bg-emerald-900\/20 { background-color: rgb(8 47 73 / 0.2) !important; }
+html.theme-firouz .bg-emerald-900\/30 { background-color: rgb(8 47 73 / 0.3) !important; }
+html.theme-firouz .bg-emerald-900\/40 { background-color: rgb(8 47 73 / 0.4) !important; }
+html.theme-firouz .bg-emerald-900\/50 { background-color: rgb(8 47 73 / 0.5) !important; }
+html.theme-firouz .bg-emerald-950 { background-color: #042f2e !important; }
+
+html.theme-firouz .border-emerald-700,
+html.theme-firouz .border-emerald-700\/40,
+html.theme-firouz .border-emerald-700\/50,
+html.theme-firouz .border-emerald-800,
+html.theme-firouz .border-emerald-900\/20,
+html.theme-firouz .border-emerald-900\/30,
+html.theme-firouz .border-emerald-900\/40,
+html.theme-firouz .border-emerald-900\/50 { border-color: rgb(14 116 144 / 0.45) !important; }
+
+html.theme-firouz .from-emerald-600 { --tw-gradient-from: #0891b2 !important; }
+html.theme-firouz .from-emerald-700 { --tw-gradient-from: #0e7490 !important; }
+html.theme-firouz .from-emerald-800 { --tw-gradient-from: #155e75 !important; }
+html.theme-firouz .to-emerald-600 { --tw-gradient-to: #0891b2 !important; }
+html.theme-firouz .to-emerald-700 { --tw-gradient-to: #0e7490 !important; }
+html.theme-firouz .to-emerald-800 { --tw-gradient-to: #155e75 !important; }
+html.theme-firouz .to-emerald-900 { --tw-gradient-to: #164e63 !important; }
+
+/* --------- LAYALI (indigo/violet night) --------- */
+html.theme-layali body { background-color: #0a0518 !important; color: #ede9fe; }
+html.theme-layali .bg-\[\#030a06\] { background-color: #0a0518 !important; }
+html.theme-layali .bg-\[\#030a06\]\/95 { background-color: rgb(10 5 24 / 0.95) !important; }
+html.theme-layali .bg-\[\#030a06\]\/90 { background-color: rgb(10 5 24 / 0.9) !important; }
+html.theme-layali .bg-\[\#030a06\]\/80 { background-color: rgb(10 5 24 / 0.8) !important; }
+
+html.theme-layali .text-emerald-300 { color: #c4b5fd !important; }
+html.theme-layali .text-emerald-400 { color: #a78bfa !important; }
+html.theme-layali .text-emerald-500 { color: #8b5cf6 !important; }
+html.theme-layali .text-emerald-600 { color: #7c3aed !important; }
+
+html.theme-layali .bg-emerald-600 { background-color: #7c3aed !important; }
+html.theme-layali .bg-emerald-700 { background-color: #6d28d9 !important; }
+html.theme-layali .bg-emerald-800 { background-color: #5b21b6 !important; }
+html.theme-layali .bg-emerald-900\/20 { background-color: rgb(76 29 149 / 0.2) !important; }
+html.theme-layali .bg-emerald-900\/30 { background-color: rgb(76 29 149 / 0.3) !important; }
+html.theme-layali .bg-emerald-900\/40 { background-color: rgb(76 29 149 / 0.4) !important; }
+html.theme-layali .bg-emerald-900\/50 { background-color: rgb(76 29 149 / 0.5) !important; }
+html.theme-layali .bg-emerald-950 { background-color: #2e1065 !important; }
+
+html.theme-layali .border-emerald-700,
+html.theme-layali .border-emerald-700\/40,
+html.theme-layali .border-emerald-700\/50,
+html.theme-layali .border-emerald-800,
+html.theme-layali .border-emerald-900\/20,
+html.theme-layali .border-emerald-900\/30,
+html.theme-layali .border-emerald-900\/40,
+html.theme-layali .border-emerald-900\/50 { border-color: rgb(109 40 217 / 0.45) !important; }
+
+html.theme-layali .from-emerald-600 { --tw-gradient-from: #7c3aed !important; }
+html.theme-layali .from-emerald-700 { --tw-gradient-from: #6d28d9 !important; }
+html.theme-layali .from-emerald-800 { --tw-gradient-from: #5b21b6 !important; }
+html.theme-layali .to-emerald-600 { --tw-gradient-to: #7c3aed !important; }
+html.theme-layali .to-emerald-700 { --tw-gradient-to: #6d28d9 !important; }
+html.theme-layali .to-emerald-800 { --tw-gradient-to: #5b21b6 !important; }
+html.theme-layali .to-emerald-900 { --tw-gradient-to: #4c1d95 !important; }
+
+/* --------- DHAHAB (warm gold / mushaf) --------- */
+html.theme-dhahab body { background-color: #1a0f08 !important; color: #fef3c7; }
+html.theme-dhahab .bg-\[\#030a06\] { background-color: #1a0f08 !important; }
+html.theme-dhahab .bg-\[\#030a06\]\/95 { background-color: rgb(26 15 8 / 0.95) !important; }
+html.theme-dhahab .bg-\[\#030a06\]\/90 { background-color: rgb(26 15 8 / 0.9) !important; }
+html.theme-dhahab .bg-\[\#030a06\]\/80 { background-color: rgb(26 15 8 / 0.8) !important; }
+
+html.theme-dhahab .text-emerald-300 { color: #fcd34d !important; }
+html.theme-dhahab .text-emerald-400 { color: #f59e0b !important; }
+html.theme-dhahab .text-emerald-500 { color: #d97706 !important; }
+html.theme-dhahab .text-emerald-600 { color: #b45309 !important; }
+
+html.theme-dhahab .bg-emerald-600 { background-color: #b45309 !important; }
+html.theme-dhahab .bg-emerald-700 { background-color: #92400e !important; }
+html.theme-dhahab .bg-emerald-800 { background-color: #78350f !important; }
+html.theme-dhahab .bg-emerald-900\/20 { background-color: rgb(120 53 15 / 0.2) !important; }
+html.theme-dhahab .bg-emerald-900\/30 { background-color: rgb(120 53 15 / 0.3) !important; }
+html.theme-dhahab .bg-emerald-900\/40 { background-color: rgb(120 53 15 / 0.4) !important; }
+html.theme-dhahab .bg-emerald-900\/50 { background-color: rgb(120 53 15 / 0.5) !important; }
+html.theme-dhahab .bg-emerald-950 { background-color: #451a03 !important; }
+
+html.theme-dhahab .border-emerald-700,
+html.theme-dhahab .border-emerald-700\/40,
+html.theme-dhahab .border-emerald-700\/50,
+html.theme-dhahab .border-emerald-800,
+html.theme-dhahab .border-emerald-900\/20,
+html.theme-dhahab .border-emerald-900\/30,
+html.theme-dhahab .border-emerald-900\/40,
+html.theme-dhahab .border-emerald-900\/50 { border-color: rgb(146 64 14 / 0.5) !important; }
+
+html.theme-dhahab .from-emerald-600 { --tw-gradient-from: #b45309 !important; }
+html.theme-dhahab .from-emerald-700 { --tw-gradient-from: #92400e !important; }
+html.theme-dhahab .from-emerald-800 { --tw-gradient-to: #78350f !important; }
+html.theme-dhahab .to-emerald-600 { --tw-gradient-to: #b45309 !important; }
+html.theme-dhahab .to-emerald-700 { --tw-gradient-to: #92400e !important; }
+html.theme-dhahab .to-emerald-800 { --tw-gradient-to: #78350f !important; }
+html.theme-dhahab .to-emerald-900 { --tw-gradient-to: #451a03 !important; }
+
+/* Shadow / glow recolor */
+html.theme-firouz .neon-emerald,
+html.theme-firouz [class*="shadow-emerald"] { box-shadow: 0 0 24px rgba(34, 211, 238, 0.35) !important; }
+html.theme-layali .neon-emerald,
+html.theme-layali [class*="shadow-emerald"] { box-shadow: 0 0 24px rgba(167, 139, 250, 0.4) !important; }
+html.theme-dhahab .neon-emerald,
+html.theme-dhahab [class*="shadow-emerald"] { box-shadow: 0 0 24px rgba(245, 158, 11, 0.4) !important; }
+
+/* ============================================================= */
+/* Display modes — global "feel" layer (radius / shadow / glass) */
+/* Independent from color themes; combines with any theme-*       */
+/* Goal: every mode reshapes BOTH cards AND buttons across all    */
+/* screens. `rounded-full` is always preserved (avatars/badges/   */
+/* pills stay circular). Colors are never changed here.           */
+/* ============================================================= */
+
+/* Smooth feel transition */
+html [class*="rounded-"],
+html button,
+html a,
+html [class*="bg-emerald-"],
+html [class*="shadow-"] { transition: border-radius 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease, backdrop-filter 0.35s ease; }
+
+/* =================== APP-WIDE TOKENS PER DISPLAY MODE ===================
+   Components with inline styles can read these via var(--app-*).
+   Fallbacks keep existing behavior when no display class is set. */
+html {
+  --app-radius-sm: 0.5rem;
+  --app-radius-md: 0.875rem;
+  --app-radius-lg: 1.25rem;
+  --app-radius-xl: 1.75rem;
+  --app-shadow-sm: 0 2px 8px -2px rgba(0,0,0,0.35);
+  --app-shadow-md: 0 8px 22px -10px rgba(0,0,0,0.55);
+  --app-shadow-lg: 0 18px 40px -14px rgba(0,0,0,0.65);
+  --app-blur: 0px;
+}
+
+/* =================== GLASS — frosted translucent, very rounded =================== */
+html.display-glass {
+  --app-radius-sm: 0.9rem;
+  --app-radius-md: 1.3rem;
+  --app-radius-lg: 1.8rem;
+  --app-radius-xl: 2.2rem;
+  --app-shadow-sm: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 4px 18px -6px rgba(0,0,0,0.4);
+  --app-shadow-md: inset 0 1px 0 rgb(255 255 255 / 0.10), 0 12px 32px -10px rgba(0,0,0,0.55);
+  --app-shadow-lg: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 22px 50px -14px rgba(0,0,0,0.65);
+  --app-blur: 14px;
+}
+/* Backdrop gradient so glass blur has something to refract */
+html.display-glass body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 20% 10%, rgb(16 185 129 / 0.18), transparent 60%),
+    radial-gradient(50% 60% at 90% 20%, rgb(45 212 191 / 0.14), transparent 65%),
+    radial-gradient(70% 60% at 50% 100%, rgb(5 150 105 / 0.16), transparent 70%);
+  filter: blur(40px);
+}
+
+html.display-glass .rounded-sm { border-radius: 0.7rem !important; }
+html.display-glass .rounded,
+html.display-glass .rounded-md { border-radius: 1.1rem !important; }
+html.display-glass .rounded-lg { border-radius: 1.3rem !important; }
+html.display-glass .rounded-xl { border-radius: 1.6rem !important; }
+html.display-glass .rounded-2xl { border-radius: 2rem !important; }
+html.display-glass .rounded-3xl { border-radius: 2.4rem !important; }
+
+/* Frost translucent surfaces across the whole emerald scale + card/popover/muted */
+html.display-glass [class*="bg-emerald-9"],
+html.display-glass [class*="bg-emerald-8"],
+html.display-glass [class*="bg-emerald-7"],
+html.display-glass [class*="bg-\[\#06140a\]"],
+html.display-glass [class*="bg-\[\#030a06\]"],
+html.display-glass .bg-card,
+html.display-glass .bg-popover,
+html.display-glass .bg-muted,
+html.display-glass [role="dialog"] > div {
+  backdrop-filter: blur(16px) saturate(150%);
+  background-color: rgb(255 255 255 / 0.06) !important;
+  border-color: rgb(110 231 183 / 0.25) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 8px 32px -10px rgba(0,0,0,0.5) !important;
+}
+/* Frost emerald buttons too */
+html.display-glass button[class*="bg-emerald-"],
+html.display-glass a[class*="bg-emerald-"] {
+  backdrop-filter: blur(12px) saturate(140%);
+  background-color: rgb(110 231 183 / 0.14) !important;
+  border: 1px solid rgb(110 231 183 / 0.30) !important;
+}
+html.display-glass [class*="border-emerald-"] {
+  border-color: rgb(255 255 255 / 0.14) !important;
+}
+html.display-glass .shadow,
+html.display-glass .shadow-sm,
+html.display-glass .shadow-md,
+html.display-glass .shadow-lg,
+html.display-glass .shadow-xl,
+html.display-glass .shadow-2xl { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 8px 32px -8px rgba(0,0,0,0.45) !important; }
+
+/* =================== SOFT — big rounded, pillowy shadows =================== */
+html.display-soft {
+  --app-radius-sm: 1rem;
+  --app-radius-md: 1.5rem;
+  --app-radius-lg: 2rem;
+  --app-radius-xl: 2.6rem;
+  --app-shadow-sm: 0 8px 22px -10px rgba(0,0,0,0.45);
+  --app-shadow-md: 0 18px 40px -14px rgba(0,0,0,0.55);
+  --app-shadow-lg: 0 28px 60px -16px rgba(0,0,0,0.65);
+}
+html.display-soft .rounded-sm { border-radius: 0.9rem !important; }
+html.display-soft .rounded,
+html.display-soft .rounded-md { border-radius: 1.2rem !important; }
+html.display-soft .rounded-lg { border-radius: 1.5rem !important; }
+html.display-soft .rounded-xl { border-radius: 1.9rem !important; }
+html.display-soft .rounded-2xl { border-radius: 2.4rem !important; }
+html.display-soft .rounded-3xl { border-radius: 3rem !important; }
+html.display-soft button:not([class*="rounded-full"]),
+html.display-soft a[class*="rounded-lg"],
+html.display-soft a[class*="rounded-xl"],
+html.display-soft a[class*="rounded-2xl"] { border-radius: 1.6rem !important; }
+html.display-soft .shadow,
+html.display-soft .shadow-sm,
+html.display-soft .shadow-md { box-shadow: 0 12px 28px -14px rgba(0,0,0,0.5) !important; }
+html.display-soft .shadow-lg { box-shadow: 0 18px 40px -16px rgba(0,0,0,0.55) !important; }
+html.display-soft .shadow-xl { box-shadow: 0 24px 50px -14px rgba(0,0,0,0.6) !important; }
+html.display-soft .shadow-2xl { box-shadow: 0 30px 65px -16px rgba(0,0,0,0.65) !important; }
+html.display-soft [class*="bg-emerald-9"],
+html.display-soft [class*="bg-emerald-8"],
+html.display-soft .bg-card,
+html.display-soft .bg-popover {
+  box-shadow: 0 20px 45px -20px rgba(0,0,0,0.6) !important;
+  border-color: rgb(16 185 129 / 0.18) !important;
+}
+html.display-soft button:not([class*="rounded-full"]) {
+  box-shadow: 0 10px 25px -10px rgba(0,0,0,0.5) !important;
+}
+
+/* =================== MINIMAL — sharp, flat, no shadows =================== */
+html.display-minimal {
+  --app-radius-sm: 0;
+  --app-radius-md: 2px;
+  --app-radius-lg: 4px;
+  --app-radius-xl: 4px;
+  --app-shadow-sm: none;
+  --app-shadow-md: none;
+  --app-shadow-lg: none;
+}
+html.display-minimal .rounded-sm,
+html.display-minimal .rounded,
+html.display-minimal .rounded-md,
+html.display-minimal .rounded-lg,
+html.display-minimal .rounded-xl,
+html.display-minimal .rounded-2xl,
+html.display-minimal .rounded-3xl { border-radius: 2px !important; }
+html.display-minimal button:not([class*="rounded-full"]),
+html.display-minimal a[class*="rounded"]:not([class*="rounded-full"]) { border-radius: 2px !important; }
+html.display-minimal [class*="shadow-"],
+html.display-minimal .shadow { box-shadow: none !important; }
+html.display-minimal [class*="bg-emerald-9"],
+html.display-minimal [class*="bg-emerald-8"],
+html.display-minimal .bg-card,
+html.display-minimal .bg-popover { box-shadow: none !important; }
+html.display-minimal [class*="border-emerald-"] { border-width: 1px !important; }
+html.display-minimal [class*="bg-emerald-9"],
+html.display-minimal [class*="bg-emerald-8"] {
+  border: 1px solid rgb(110 231 183 / 0.18) !important;
+}
+
+/* =================== ELEVATED — raised cards, strong depth =================== */
+html.display-elevated {
+  --app-radius-sm: 0.5rem;
+  --app-radius-md: 0.8rem;
+  --app-radius-lg: 1rem;
+  --app-radius-xl: 1.3rem;
+  --app-shadow-sm: 0 1px 0 rgba(255,255,255,0.06), 0 6px 14px -4px rgba(0,0,0,0.55);
+  --app-shadow-md: 0 1px 0 rgba(255,255,255,0.07), 0 14px 28px -8px rgba(0,0,0,0.65);
+  --app-shadow-lg: 0 1px 0 rgba(255,255,255,0.08), 0 24px 50px -10px rgba(0,0,0,0.78);
+}
+html.display-elevated .rounded,
+html.display-elevated .rounded-md { border-radius: 0.6rem !important; }
+html.display-elevated .rounded-lg { border-radius: 0.8rem !important; }
+html.display-elevated .rounded-xl { border-radius: 1rem !important; }
+html.display-elevated .rounded-2xl { border-radius: 1.2rem !important; }
+html.display-elevated .rounded-3xl { border-radius: 1.5rem !important; }
+html.display-elevated .shadow,
+html.display-elevated .shadow-sm,
+html.display-elevated .shadow-md { box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 8px 18px -6px rgba(0,0,0,0.6) !important; }
+html.display-elevated .shadow-lg { box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 16px 34px -10px rgba(0,0,0,0.7) !important; }
+html.display-elevated .shadow-xl { box-shadow: 0 1px 0 rgba(255,255,255,0.07), 0 20px 44px -10px rgba(0,0,0,0.75) !important; }
+html.display-elevated .shadow-2xl { box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 28px 60px -12px rgba(0,0,0,0.8) !important; }
+html.display-elevated [class*="bg-emerald-9"],
+html.display-elevated [class*="bg-emerald-8"],
+html.display-elevated .bg-card,
+html.display-elevated .bg-popover {
+  box-shadow: 0 1px 0 rgba(255,255,255,0.07), 0 18px 38px -12px rgba(0,0,0,0.75) !important;
+  border-top-color: rgb(255 255 255 / 0.10) !important;
+}
+html.display-elevated button[class*="bg-"]:not([class*="rounded-full"]),
+html.display-elevated a[class*="bg-emerald"]:not([class*="rounded-full"]) {
+  box-shadow: 0 1px 0 rgba(255,255,255,0.10), 0 10px 20px -6px rgba(0,0,0,0.65) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+html.display-elevated button[class*="bg-"]:not([class*="rounded-full"]):hover,
+html.display-elevated a[class*="bg-emerald"]:not([class*="rounded-full"]):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12), 0 14px 26px -6px rgba(0,0,0,0.75) !important;
+}
+
+/* ===================================================================
+   App template: قالب الفجر — applied globally to every page.
+   Repaints only the body shell into a warm cream/beige Fajr palette and
+   reserves space for the fixed bottom tab. Card surfaces, gradients, and
+   the AdhanModal stay in their original dark emerald look so white text
+   on dark cards remains readable on every page. The Fajr-only hero
+   components (FajrHome / FajrNavbar / FajrBottomTab) build their cream
+   look themselves with explicit classes.
+   =================================================================== */
+html.app-template-fajr body {
+  background: #ffffff !important;
+}
+/* Hide the original top navigation + footer — bottom tab takes over. */
+html.app-template-fajr nav.fixed.top-0,
+html.app-template-fajr footer {
+  display: none !important;
+}
+/* Reserve room for the fixed bottom tab on every page */
+html.app-template-fajr body {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+}
+/* Neutralize outermost full-page dark backgrounds so the white body shows. */
+html.app-template-fajr main.min-h-screen {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+/* Hard-coded dark hex surfaces (page backgrounds, sticky headers, cards) →
+   white. Using substring match so /95, /80 opacity variants also flip. */
+html.app-template-fajr [class*="030a06"],
+html.app-template-fajr [class*="020806"],
+html.app-template-fajr [class*="06140a"],
+html.app-template-fajr [class*="0a1f17"],
+html.app-template-fajr [class*="08160f"],
+html.app-template-fajr [class*="0b1d14"],
+html.app-template-fajr [class*="04130c"],
+html.app-template-fajr [class*="051a12"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+/* Quran filter buttons (الكل/مكية/مدنية): emerald in the classic template,
+   but white with black text inside the Fajr template only. */
+html.app-template-fajr .surah-filter-btn {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border-color: #e5e7eb !important;
+}
+html.app-template-fajr .surah-filter-btn.surah-filter-btn--active {
+  border-color: #d1d5db !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* White text inside surfaces that we re-skinned to white → near-black so
+   it stays readable. Standalone dark buttons (e.g. bg-neutral-900) keep
+   their white text because this rule is scoped to former-dark containers. */
+html.app-template-fajr [class*="bg-emerald-9"] .text-white,
+html.app-template-fajr [class*="bg-emerald-8"] .text-white,
+html.app-template-fajr [class*="bg-emerald-1"] .text-white,
+html.app-template-fajr [class*="bg-emerald-50"] .text-white,
+html.app-template-fajr [class*="bg-emerald-9"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-8"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-1"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-50"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-9"][class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-8"][class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-1"][class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-50"][class*="text-white"],
+html.app-template-fajr [class*="030a06"] [class*="text-white"],
+html.app-template-fajr [class*="020806"] [class*="text-white"],
+html.app-template-fajr [class*="06140a"] [class*="text-white"],
+html.app-template-fajr .glass .text-white,
+html.app-template-fajr .glass .text-white *,
+html.app-template-fajr .glass-card .text-white,
+html.app-template-fajr .glass-card .text-white *,
+html.app-template-fajr .glass [class*="text-white"],
+html.app-template-fajr .glass-card [class*="text-white"],
+html.app-template-fajr h1.text-white,
+html.app-template-fajr h2.text-white,
+html.app-template-fajr h3.text-white,
+html.app-template-fajr h4.text-white,
+html.app-template-fajr h1[class*="text-white"],
+html.app-template-fajr h2[class*="text-white"],
+html.app-template-fajr h3[class*="text-white"],
+html.app-template-fajr h4[class*="text-white"] {
+  color: #171717 !important;
+}
+/* Muted gray text on white surfaces. */
+html.app-template-fajr [class*="text-gray-300"],
+html.app-template-fajr [class*="text-gray-400"],
+html.app-template-fajr [class*="text-gray-500"],
+html.app-template-fajr [class*="text-gray-600"] {
+  color: #525252 !important;
+}
+
+/* Accent buttons in Fajr (bg-emerald-500/600/700) are white surfaces — keep
+   text BLACK and add a visible border so they remain readable on white pages.
+   Must come AFTER all .glass-card .text-white overrides above. */
+html.app-template-fajr [class*="bg-emerald-7"].text-white,
+html.app-template-fajr [class*="bg-emerald-6"].text-white,
+html.app-template-fajr [class*="bg-emerald-5"].text-white,
+html.app-template-fajr [class*="bg-emerald-7"] .text-white,
+html.app-template-fajr [class*="bg-emerald-6"] .text-white,
+html.app-template-fajr [class*="bg-emerald-5"] .text-white,
+html.app-template-fajr [class*="bg-emerald-7"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-6"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-5"] [class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-7"][class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-6"][class*="text-white"],
+html.app-template-fajr [class*="bg-emerald-5"][class*="text-white"] {
+  color: #171717 !important;
+}
+
+
+
+/* ---- Pure white / neutral palette for ALL Fajr surfaces ----
+   No green anywhere. Cards are white with neutral borders; emerald,
+   amber and black accents collapse to neutral grayscale. */
+:root {
+  --fajr-card: #ffffff;
+  --fajr-card-strong: #fafafa;
+  --fajr-card-soft: #f5f5f5;
+  --fajr-accent: #ffffff;
+  --fajr-accent-strong: #fafafa;
+  --fajr-border: #e5e5e5;
+}
+html.app-template-fajr .glass,
+html.app-template-fajr .glass-card {
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: var(--fajr-border) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px -4px rgba(0,0,0,0.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html.app-template-fajr .glass-card-gold {
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: var(--fajr-border) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px -4px rgba(0,0,0,0.06) !important;
+}
+/* Every emerald-tinted dark surface → very light neutral */
+html.app-template-fajr [class*="bg-emerald-950"],
+html.app-template-fajr [class*="bg-emerald-900"],
+html.app-template-fajr [class*="bg-emerald-800"] {
+  background-color: var(--fajr-card-soft) !important;
+  background-image: none !important;
+}
+/* Emerald primary buttons → white surface with black text + soft border */
+html.app-template-fajr [class*="bg-emerald-700"],
+html.app-template-fajr [class*="bg-emerald-600"],
+html.app-template-fajr [class*="bg-emerald-500"] {
+  background-color: var(--fajr-accent) !important;
+  background-image: none !important;
+  color: #171717 !important;
+  border: 1px solid var(--fajr-border) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px -4px rgba(0,0,0,0.06) !important;
+}
+html.app-template-fajr [class*="bg-emerald-100"],
+html.app-template-fajr [class*="bg-emerald-50"] {
+  background-color: var(--fajr-card-soft) !important;
+}
+html.app-template-fajr .bg-\[\#0a1f17\],
+html.app-template-fajr .bg-\[\#08160f\],
+html.app-template-fajr .bg-\[\#0b1d14\],
+html.app-template-fajr .bg-\[\#04130c\],
+html.app-template-fajr .bg-\[\#051a12\] {
+  background-color: var(--fajr-card-soft) !important;
+}
+/* All emerald borders → neutral */
+html.app-template-fajr [class*="border-emerald"] {
+  border-color: var(--fajr-border) !important;
+}
+/* Emerald gradients flatten to white */
+html.app-template-fajr [class*="bg-gradient"][class*="from-emerald"],
+html.app-template-fajr [class*="bg-gradient"][class*="to-emerald"],
+html.app-template-fajr [class*="bg-gradient"][class*="via-emerald"] {
+  background-image: linear-gradient(180deg, #ffffff 0%, #fafafa 100%) !important;
+}
+/* Emerald text in every shade → near-black for AA contrast on white */
+html.app-template-fajr [class*="text-emerald"] {
+  color: #171717 !important;
+}
+/* Emerald rings → neutral */
+html.app-template-fajr [class*="ring-emerald"] {
+  --tw-ring-color: var(--fajr-border) !important;
+}
+
+/* ---- Other green-family palettes (green/teal/lime) → neutral ---- */
+html.app-template-fajr [class*="bg-green"],
+html.app-template-fajr [class*="bg-teal"],
+html.app-template-fajr [class*="bg-lime"] {
+  background-color: var(--fajr-card-soft) !important;
+  background-image: none !important;
+}
+html.app-template-fajr [class*="text-green"],
+html.app-template-fajr [class*="text-teal"],
+html.app-template-fajr [class*="text-lime"] {
+  color: #171717 !important;
+}
+html.app-template-fajr [class*="border-green"],
+html.app-template-fajr [class*="border-teal"],
+html.app-template-fajr [class*="border-lime"] {
+  border-color: var(--fajr-border) !important;
+}
+html.app-template-fajr [class*="ring-green"],
+html.app-template-fajr [class*="ring-teal"],
+html.app-template-fajr [class*="ring-lime"] {
+  --tw-ring-color: var(--fajr-border) !important;
+}
+html.app-template-fajr [class*="bg-gradient"][class*="from-green"],
+html.app-template-fajr [class*="bg-gradient"][class*="to-green"],
+html.app-template-fajr [class*="bg-gradient"][class*="from-teal"],
+html.app-template-fajr [class*="bg-gradient"][class*="to-teal"],
+html.app-template-fajr [class*="bg-gradient"][class*="from-lime"],
+html.app-template-fajr [class*="bg-gradient"][class*="to-lime"] {
+  background-image: linear-gradient(180deg, #ffffff 0%, #fafafa 100%) !important;
+}
+
+/* ---- Amber / yellow / gold accents → neutral ---- */
+html.app-template-fajr [class*="bg-amber"],
+html.app-template-fajr [class*="bg-yellow"] {
+  background-color: var(--fajr-card-soft) !important;
+  background-image: none !important;
+}
+html.app-template-fajr [class*="text-amber"],
+html.app-template-fajr [class*="text-yellow"] {
+  color: #525252 !important;
+}
+html.app-template-fajr [class*="border-amber"],
+html.app-template-fajr [class*="border-yellow"] {
+  border-color: var(--fajr-border) !important;
+}
+html.app-template-fajr [class*="bg-gradient"][class*="from-amber"],
+html.app-template-fajr [class*="bg-gradient"][class*="to-amber"],
+html.app-template-fajr [class*="bg-gradient"][class*="from-yellow"],
+html.app-template-fajr [class*="bg-gradient"][class*="to-yellow"] {
+  background-image: linear-gradient(180deg, #ffffff 0%, #fafafa 100%) !important;
+}
+
+/* ---- Generic gray text contrast (covers gray-100..-200 leaks too) ---- */
+html.app-template-fajr [class*="text-gray-100"],
+html.app-template-fajr [class*="text-gray-200"] {
+  color: #525252 !important;
+}
+/* Make body copy on white surfaces solid neutral-900 for AA on bright
+   screens, AAA on dim screens. */
+html.app-template-fajr [class*="text-gray-700"],
+html.app-template-fajr [class*="text-gray-800"],
+html.app-template-fajr [class*="text-gray-900"] {
+  color: #171717 !important;
+}
+
+/* Generic body text fallback so any element that inherited `color: white`
+   from the body still reads on white. */
+html.app-template-fajr body {
+  color: #171717 !important;
+}
+
+/* Inline bismillah / gold text with hardcoded cream color */
+html.app-template-fajr [style*="#fef3c7"],
+html.app-template-fajr [style*="fef3c7"] {
+  color: #171717 !important;
+  text-shadow: none !important;
+}
+/* `bg-black` and `bg-black/*` utilities → neutral */
+html.app-template-fajr .bg-black,
+html.app-template-fajr [class*="bg-black/"] {
+  background-color: var(--fajr-card-soft) !important;
+  color: #171717 !important;
+}
+/* Very dark gray utility surfaces used by Quran cards/actions → light neutral,
+   so black blocks never sit behind text in Fajr. */
+html.app-template-fajr .bg-gray-950,
+html.app-template-fajr .bg-gray-900,
+html.app-template-fajr [class*="bg-gray-950"],
+html.app-template-fajr [class*="bg-gray-900"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #171717 !important;
+}
+html.app-template-fajr [class*="border-gray-800"],
+html.app-template-fajr [class*="border-gray-900"] {
+  border-color: var(--fajr-border) !important;
+}
+/* Red destructive accents kept but softened */
+html.app-template-fajr [class*="bg-red-9"],
+html.app-template-fajr [class*="bg-red-8"] {
+  background-color: #fef2f2 !important;
+}
+html.app-template-fajr [class*="text-red-3"],
+html.app-template-fajr [class*="text-red-4"] {
+  color: #dc2626 !important;
+}
+html.app-template-fajr [class*="border-red"] {
+  border-color: #fecaca !important;
+}
+/* AdhanModal stays dark (fullscreen overlay) — revert everything inside it. */
+html.app-template-fajr .adhan-modal .glass,
+html.app-template-fajr .adhan-modal .glass-card,
+html.app-template-fajr .adhan-modal [class*="bg-emerald-950"],
+html.app-template-fajr .adhan-modal [class*="bg-emerald-900"],
+html.app-template-fajr .adhan-modal [class*="bg-black"],
+html.app-template-fajr .adhan-modal [class*="text-white"],
+html.app-template-fajr .adhan-modal .text-white,
+html.app-template-fajr .adhan-modal [class*="text-emerald"] {
+  background: revert !important;
+  background-image: revert !important;
+  background-color: revert !important;
+  color: revert !important;
+  box-shadow: revert !important;
+}
+html.app-template-fajr .adhan-modal [class*="text-emerald-300"] { color: #6ee7b7 !important; }
+html.app-template-fajr .adhan-modal [class*="text-emerald-400"] { color: #34d399 !important; }
+/* Quran reading surface: white page, near-black ink.
+   This intentionally beats inline React colors used for the mushaf text and
+   Bismillah so they remain visible on bright/low-brightness screens. */
+html.app-template-fajr .quran-page {
+  background: #ffffff !important;
+  background-image: none !important;
+  color: #171717 !important;
+  border: 1px solid var(--fajr-border) !important;
+  box-shadow: none !important;
+}
+html.app-template-fajr .quran-page,
+html.app-template-fajr .quran-page * {
+  color: #111111 !important;
+  text-shadow: none !important;
+}
+html.app-template-fajr .quran-page [style*="color: #f0fdf4"],
+html.app-template-fajr .quran-page [style*="color:#f0fdf4"],
+html.app-template-fajr .quran-page [style*="rgb(240, 253, 244)"] {
+  color: #171717 !important;
+}
+html.app-template-fajr [style*="color: #fef3c7"],
+html.app-template-fajr [style*="color:#fef3c7"],
+html.app-template-fajr [style*="rgb(254, 243, 199)"] {
+  color: #111111 !important;
+  text-shadow: none !important;
+}
+html.app-template-fajr .quran-page [class*="from-amber"],
+html.app-template-fajr .quran-page [class*="via-emerald"],
+html.app-template-fajr .quran-page [class*="to-amber"] {
+  background-image: none !important;
+  background-color: #f5f5f5 !important;
+  box-shadow: none !important;
+}
+html.app-template-fajr .quran-page span[class*="hover:bg-emerald"] {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+html.app-template-fajr .quran-page [class*="hover:bg-emerald"]:hover {
+  background-color: #f5f5f5 !important;
+  box-shadow: none !important;
+}
+html.app-template-fajr .quran-page [class*="shadow-"] {
+  box-shadow: none !important;
+}
+
+/* The /more index page hero title uses `text-white` on the cream body — the
+   rule above already handles it. The supplementary description below uses
+   text-gray-300 on the body shell and is handled by the rule above too. */
+
+
+/* ============================================================
+   Fajr Night Mode — toggled by `html.fajr-night.app-template-fajr`
+   Inverts the white Fajr palette to pure black with white text
+   and white icons. Scoped strictly to the Fajr template.
+   ============================================================ */
+html.app-template-fajr .fajr-root {
+  background: #ffffff;
+}
+html.app-template-fajr.fajr-night .fajr-root {
+  background: #000000 !important;
+}
+
+/* Body/global text color in night mode */
+html.app-template-fajr.fajr-night body,
+html.app-template-fajr.fajr-night .fajr-root,
+html.app-template-fajr.fajr-night .fajr-root * {
+  color: #ffffff !important;
+}
+
+/* Lucide icons (inherit currentColor) — force white */
+html.app-template-fajr.fajr-night svg {
+  color: #ffffff !important;
+  stroke: currentColor !important;
+}
+
+/* All white / neutral surfaces → black */
+html.app-template-fajr.fajr-night .bg-white,
+html.app-template-fajr.fajr-night [class*="bg-white"],
+html.app-template-fajr.fajr-night [class*="bg-neutral-50"],
+html.app-template-fajr.fajr-night [class*="bg-neutral-100"],
+html.app-template-fajr.fajr-night [class*="bg-neutral-200"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Cards/glass overrides re-applied for night */
+html.app-template-fajr.fajr-night .glass,
+html.app-template-fajr.fajr-night .glass-card,
+html.app-template-fajr.fajr-night .glass-card-gold {
+  background: #000000 !important;
+  background-image: none !important;
+  border-color: #262626 !important;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.04), 0 4px 12px -4px rgba(0,0,0,0.6) !important;
+}
+
+/* Borders → dark neutral so cards remain defined on black */
+html.app-template-fajr.fajr-night [class*="border-neutral"],
+html.app-template-fajr.fajr-night [class*="border-gray"],
+html.app-template-fajr.fajr-night [class*="border-emerald"],
+html.app-template-fajr.fajr-night [class*="border-white"] {
+  border-color: #262626 !important;
+}
+html.app-template-fajr.fajr-night {
+  --fajr-card: #000000;
+  --fajr-card-strong: #0a0a0a;
+  --fajr-card-soft: #0a0a0a;
+  --fajr-accent: #000000;
+  --fajr-accent-strong: #0a0a0a;
+  --fajr-border: #262626;
+}
+
+/* Emerald primary buttons in night → black surface, white text, white border */
+html.app-template-fajr.fajr-night [class*="bg-emerald-700"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-600"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-500"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Muted / dark text shades → light gray for hierarchy on black */
+html.app-template-fajr.fajr-night [class*="text-neutral-500"],
+html.app-template-fajr.fajr-night [class*="text-neutral-600"],
+html.app-template-fajr.fajr-night [class*="text-neutral-700"],
+html.app-template-fajr.fajr-night [class*="text-neutral-800"],
+html.app-template-fajr.fajr-night [class*="text-neutral-900"],
+html.app-template-fajr.fajr-night [class*="text-gray-400"],
+html.app-template-fajr.fajr-night [class*="text-gray-500"],
+html.app-template-fajr.fajr-night [class*="text-gray-600"],
+html.app-template-fajr.fajr-night [class*="text-gray-700"],
+html.app-template-fajr.fajr-night [class*="text-gray-800"],
+html.app-template-fajr.fajr-night [class*="text-gray-900"],
+html.app-template-fajr.fajr-night [class*="text-black"] {
+  color: #e5e5e5 !important;
+}
+
+/* Force all SVG icons (incl. play/pause/volume) to stay visible white on black */
+html.app-template-fajr.fajr-night button svg,
+html.app-template-fajr.fajr-night a svg,
+html.app-template-fajr.fajr-night [role="button"] svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Hero header overlays in night: keep the moon/stars visible. */
+html.app-template-fajr.fajr-night .fajr-root .fajr-hero-overlay {
+  background-color: rgba(0,0,0,0.10) !important;
+  background-image: none !important;
+}
+html.app-template-fajr.fajr-night .fajr-root .fajr-hero-gradient-top {
+  background-color: transparent !important;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), transparent) !important;
+}
+html.app-template-fajr.fajr-night .fajr-root .fajr-hero-gradient-bottom {
+  background-color: transparent !important;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.25), transparent) !important;
+}
+
+/* Default (day) tab colors */
+.fajr-bottom-tab-link { color: #737373; }
+.fajr-bottom-tab-link-active,
+.fajr-bottom-tab-link-active .fajr-bottom-tab-label { color: #1f1f1f !important; }
+.fajr-bottom-tab-icon-wrap.is-active { background: rgba(0,0,0,0.06); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15); }
+.fajr-bottom-tab-indicator { background: #404040; }
+
+/* Quran page in night */
+html.app-template-fajr.fajr-night .quran-page,
+html.app-template-fajr.fajr-night .quran-page * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* ============================================================
+   Fajr Night Mode — extend coverage to the Navbar & Bottom Tab
+   (they live OUTSIDE .fajr-root, so .fajr-root rules don't catch them)
+   ============================================================ */
+html.app-template-fajr.fajr-night .app-template-fajr-nav,
+html.app-template-fajr.fajr-night .app-template-fajr-nav * {
+  color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night .app-template-fajr-nav {
+  background: #000000 !important;
+  border-bottom-color: #262626 !important;
+}
+html.app-template-fajr.fajr-night .app-template-fajr-nav svg {
+  color: #ffffff !important;
+  stroke: currentColor !important;
+}
+/* Navbar inline white surfaces (logo pill, menu button, drawer, link tiles) */
+html.app-template-fajr.fajr-night .app-template-fajr-nav [style*="background: rgb(255, 255, 255)"],
+html.app-template-fajr.fajr-night .app-template-fajr-nav [style*="background: #ffffff"],
+html.app-template-fajr.fajr-night .app-template-fajr-nav [style*="background: #fff"] {
+  background: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* Drawer overlay container — match by element role (the absolute panel) */
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 > div[style*="background: rgb(255, 255, 255)"],
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 > div[style*="#ffffff"] {
+  background: #000000 !important;
+  border-left-color: #262626 !important;
+}
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 a,
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 span,
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 button,
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 svg {
+  color: #ffffff !important;
+  background-color: transparent !important;
+  border-color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 a[style],
+html.app-template-fajr.fajr-night .fixed.inset-0.z-50 button[style] {
+  background: #000000 !important;
+}
+
+/* Bottom tab */
+html.app-template-fajr.fajr-night .fajr-bottom-tab {
+  background: #000000 !important;
+  border-top-color: #ffffff !important;
+  box-shadow: 0 -8px 30px -10px rgba(255,255,255,0.08) !important;
+}
+html.app-template-fajr.fajr-night .fajr-bottom-tab-link,
+html.app-template-fajr.fajr-night .fajr-bottom-tab-label {
+  color: #d4d4d4 !important;
+}
+html.app-template-fajr.fajr-night .fajr-bottom-tab-link-active,
+html.app-template-fajr.fajr-night .fajr-bottom-tab-link-active .fajr-bottom-tab-label {
+  color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night .fajr-bottom-tab svg {
+  color: #ffffff !important;
+  stroke: currentColor !important;
+}
+html.app-template-fajr.fajr-night .fajr-bottom-tab-icon-wrap.is-active {
+  background: rgba(255,255,255,0.10) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35) !important;
+}
+html.app-template-fajr.fajr-night .fajr-bottom-tab-indicator {
+  background: #ffffff !important;
+}
+html.app-template-fajr.fajr-night .fajr-bottom-tab-accent {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent) !important;
+}
+
+/* Hero banner image: keep it but darken instead of whiten */
+html.app-template-fajr.fajr-night .fajr-root img {
+  filter: none !important;
+}
+
+/* ============================================================
+   Fajr Night Mode — final hardening pass
+   Goal: pure-black surfaces everywhere, white text/icons/shapes.
+   ============================================================ */
+
+/* Body itself goes black so non-Fajr inner pages still look right */
+html.app-template-fajr.fajr-night,
+html.app-template-fajr.fajr-night body {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Inner pages (non-Fajr templates) that use dark emerald hexes already
+   get flipped to white in day mode — in night mode, force them to black. */
+html.app-template-fajr.fajr-night [class*="030a06"],
+html.app-template-fajr.fajr-night [class*="020806"],
+html.app-template-fajr.fajr-night [class*="06140a"],
+html.app-template-fajr.fajr-night [class*="0a1f17"],
+html.app-template-fajr.fajr-night [class*="08160f"],
+html.app-template-fajr.fajr-night [class*="0b1d14"],
+html.app-template-fajr.fajr-night [class*="04130c"],
+html.app-template-fajr.fajr-night [class*="051a12"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-9"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-8"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-7"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-6"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-5"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-1"],
+html.app-template-fajr.fajr-night [class*="bg-emerald-50"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+/* Gradient surfaces → flat black, except the Fajr hero gradients. */
+html.app-template-fajr.fajr-night [class*="bg-gradient"]:not(.fajr-hero-gradient-top):not(.fajr-hero-gradient-bottom) {
+  background-image: none !important;
+  background-color: #000000 !important;
+}
+
+/* Force every text utility to white (covers text-emerald-*, text-gray-*, text-black, etc.) */
+html.app-template-fajr.fajr-night [class*="text-emerald"],
+html.app-template-fajr.fajr-night [class*="text-gray-9"],
+html.app-template-fajr.fajr-night [class*="text-gray-8"],
+html.app-template-fajr.fajr-night [class*="text-neutral-8"],
+html.app-template-fajr.fajr-night [class*="text-neutral-9"],
+html.app-template-fajr.fajr-night [class*="text-black"],
+html.app-template-fajr.fajr-night .text-black {
+  color: #ffffff !important;
+}
+
+/* `text-white` headings/labels: the Fajr DAY rules flip them to near-black
+   (#171717) so they read on the light theme (e.g. `.glass-card .text-white`,
+   `h1-h4.text-white`). In NIGHT mode they must return to white, otherwise they
+   render black-on-black and vanish (Progress/Listen/Prayer/Tasbeeh headings).
+   Placed BEFORE the inverted `bg-neutral-900` pill rule below so that the
+   selected-pill's black text is preserved. */
+html.app-template-fajr.fajr-night .text-white,
+html.app-template-fajr.fajr-night [class*="text-white"],
+html.app-template-fajr.fajr-night .glass .text-white,
+html.app-template-fajr.fajr-night .glass-card .text-white,
+html.app-template-fajr.fajr-night h1.text-white,
+html.app-template-fajr.fajr-night h2.text-white,
+html.app-template-fajr.fajr-night h3.text-white,
+html.app-template-fajr.fajr-night h4.text-white,
+html.app-template-fajr.fajr-night h1[class*="text-white"],
+html.app-template-fajr.fajr-night h2[class*="text-white"],
+html.app-template-fajr.fajr-night h3[class*="text-white"],
+html.app-template-fajr.fajr-night h4[class*="text-white"] {
+  color: #ffffff !important;
+}
+
+/* Muted secondary text: lift to a clearly legible light gray on black. */
+html.app-template-fajr.fajr-night [class*="text-gray-300"],
+html.app-template-fajr.fajr-night [class*="text-gray-400"],
+html.app-template-fajr.fajr-night [class*="text-gray-500"],
+html.app-template-fajr.fajr-night [class*="text-gray-600"],
+html.app-template-fajr.fajr-night [class*="text-neutral-400"],
+html.app-template-fajr.fajr-night [class*="text-neutral-500"],
+html.app-template-fajr.fajr-night [class*="text-neutral-600"] {
+  color: #c4c4c4 !important;
+}
+
+
+
+/* Inputs / textareas / selects → black with white text */
+html.app-template-fajr.fajr-night input,
+html.app-template-fajr.fajr-night textarea,
+html.app-template-fajr.fajr-night select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night input::placeholder,
+html.app-template-fajr.fajr-night textarea::placeholder {
+  color: #a3a3a3 !important;
+}
+
+/* Selected filter pill (e.g. neutral-900 bg with white text) — keep it inverted:
+   white pill, black text — so the "selected" state still pops on a black page. */
+html.app-template-fajr.fajr-night [class*="bg-neutral-900"],
+html.app-template-fajr.fajr-night [class*="bg-neutral-800"] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="bg-neutral-900"] *,
+html.app-template-fajr.fajr-night [class*="bg-neutral-800"] * {
+  color: #000000 !important;
+}
+html.app-template-fajr.fajr-night [class*="bg-neutral-900"] svg,
+html.app-template-fajr.fajr-night [class*="bg-neutral-800"] svg {
+  color: #000000 !important;
+}
+
+/* Ring colors → white so focus/active outlines stay visible */
+html.app-template-fajr.fajr-night [class*="ring-"] {
+  --tw-ring-color: #ffffff !important;
+}
+
+/* Shadows: switch to subtle white glow for definition on black */
+html.app-template-fajr.fajr-night [class*="shadow"] {
+  box-shadow: 0 1px 2px rgba(255,255,255,0.06), 0 6px 18px -8px rgba(255,255,255,0.08) !important;
+}
+
+/* ============================================================
+   Fajr Night Mode — exhaustive day-rule mirror pass.
+   Each rule below directly counters a Fajr DAY rule that
+   re-skins a surface, text, border, or gradient to white/light.
+   In night mode every such surface MUST be pure black with
+   white text/icons/borders so nothing disappears.
+   ============================================================ */
+
+/* Gray surfaces used as cards/buttons (lists, filter pills, reciter
+   buttons, etc.) — day rule paints them white, must be black in night. */
+html.app-template-fajr.fajr-night .bg-gray-950,
+html.app-template-fajr.fajr-night .bg-gray-900,
+html.app-template-fajr.fajr-night [class*="bg-gray-950"],
+html.app-template-fajr.fajr-night [class*="bg-gray-900"],
+html.app-template-fajr.fajr-night [class*="bg-gray-800"],
+html.app-template-fajr.fajr-night [class*="bg-gray-700"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="border-gray-700"],
+html.app-template-fajr.fajr-night [class*="border-gray-800"],
+html.app-template-fajr.fajr-night [class*="border-gray-900"] {
+  border-color: #ffffff !important;
+}
+
+/* `bg-black` and `bg-black/*` utilities — day rule paints them light,
+   must stay black in night with white text. */
+html.app-template-fajr.fajr-night .bg-black,
+html.app-template-fajr.fajr-night [class*="bg-black"],
+html.app-template-fajr.fajr-night [class*="bg-black/"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+/* Green / teal / lime palette — day rule flattens to light neutral.
+   In night: black surface, white text/icons, white border. */
+html.app-template-fajr.fajr-night [class*="bg-green"],
+html.app-template-fajr.fajr-night [class*="bg-teal"],
+html.app-template-fajr.fajr-night [class*="bg-lime"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+html.app-template-fajr.fajr-night [class*="text-green"],
+html.app-template-fajr.fajr-night [class*="text-teal"],
+html.app-template-fajr.fajr-night [class*="text-lime"] {
+  color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="border-green"],
+html.app-template-fajr.fajr-night [class*="border-teal"],
+html.app-template-fajr.fajr-night [class*="border-lime"] {
+  border-color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="ring-green"],
+html.app-template-fajr.fajr-night [class*="ring-teal"],
+html.app-template-fajr.fajr-night [class*="ring-lime"] {
+  --tw-ring-color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="from-green"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="to-green"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="from-teal"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="to-teal"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="from-lime"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="to-lime"] {
+  background-image: none !important;
+  background-color: #000000 !important;
+}
+
+/* Amber / yellow / gold accents — day rule flattens to light neutral.
+   In night: black surface, white text/icons. */
+html.app-template-fajr.fajr-night [class*="bg-amber"],
+html.app-template-fajr.fajr-night [class*="bg-yellow"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+html.app-template-fajr.fajr-night [class*="text-amber"],
+html.app-template-fajr.fajr-night [class*="text-yellow"],
+html.app-template-fajr.fajr-night [class*="text-gold"] {
+  color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="border-amber"],
+html.app-template-fajr.fajr-night [class*="border-yellow"] {
+  border-color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="from-amber"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="to-amber"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="from-yellow"],
+html.app-template-fajr.fajr-night [class*="bg-gradient"][class*="to-yellow"] {
+  background-image: none !important;
+  background-color: #000000 !important;
+}
+
+/* Red destructive — day softens to pale red. In night: black bg with
+   white text and a white border so the destructive action still reads. */
+html.app-template-fajr.fajr-night [class*="bg-red"] {
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+html.app-template-fajr.fajr-night [class*="text-red"] {
+  color: #ffffff !important;
+}
+html.app-template-fajr.fajr-night [class*="border-red"] {
+  border-color: #ffffff !important;
+}
+
+/* Light gray text utilities (gray-100/200) — day rule darkens them.
+   In night they need to be white to read on black. */
+html.app-template-fajr.fajr-night [class*="text-gray-100"],
+html.app-template-fajr.fajr-night [class*="text-gray-200"],
+html.app-template-fajr.fajr-night [class*="text-gray-300"],
+html.app-template-fajr.fajr-night [class*="text-gray-700"],
+html.app-template-fajr.fajr-night [class*="text-gray-800"],
+html.app-template-fajr.fajr-night [class*="text-gray-900"],
+html.app-template-fajr.fajr-night [class*="text-neutral-300"],
+html.app-template-fajr.fajr-night [class*="text-neutral-200"],
+html.app-template-fajr.fajr-night [class*="text-neutral-100"] {
+  color: #ffffff !important;
+}
+
+/* Inline cream/gold colors used by mushaf/bismillah text — day forces
+   near-black for white pages; in night force white for black pages. */
+html.app-template-fajr.fajr-night [style*="#fef3c7"],
+html.app-template-fajr.fajr-night [style*="fef3c7"],
+html.app-template-fajr.fajr-night [style*="color: #f0fdf4"],
+html.app-template-fajr.fajr-night [style*="color:#f0fdf4"],
+html.app-template-fajr.fajr-night [style*="rgb(240, 253, 244)"],
+html.app-template-fajr.fajr-night [style*="rgb(254, 243, 199)"] {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Quran-page inner spans/hover surfaces — day repaints to light neutral. */
+html.app-template-fajr.fajr-night .quran-page [class*="from-amber"],
+html.app-template-fajr.fajr-night .quran-page [class*="via-emerald"],
+html.app-template-fajr.fajr-night .quran-page [class*="to-amber"] {
+  background-image: none !important;
+  background-color: #000000 !important;
+  box-shadow: none !important;
+}
+html.app-template-fajr.fajr-night .quran-page [class*="hover:bg-emerald"]:hover {
+  background-color: #0a0a0a !important;
+}
+
+/* All Lucide icons / inline SVG strokes anywhere on the page (outside
+   .fajr-root too) — force white so they read on black. */
+html.app-template-fajr.fajr-night svg,
+html.app-template-fajr.fajr-night svg * {
+  color: #ffffff !important;
+}
+/* Stroked path/circle/rect/line — force white stroke. Some icons use
+   `stroke="currentColor"` which is fine; explicit dark strokes need a flip. */
+html.app-template-fajr.fajr-night svg [stroke]:not([stroke="none"]) {
+  stroke: #ffffff !important;
+}
+/* Filled shapes drawn inside icon boxes — flip dark fills to white. */
+html.app-template-fajr.fajr-night svg [fill="#000"],
+html.app-template-fajr.fajr-night svg [fill="#000000"],
+html.app-template-fajr.fajr-night svg [fill="black"],
+html.app-template-fajr.fajr-night svg [fill="#111"],
+html.app-template-fajr.fajr-night svg [fill="#171717"],
+html.app-template-fajr.fajr-night svg [fill="#1f2937"] {
+  fill: #ffffff !important;
+}
+
+/* The floating "تحديثات جديدة" update banner / sonner toasts / floating
+   contact bubble all live OUTSIDE .fajr-root. Force their default white
+   card surfaces to black with white text + a visible white border. */
+html.app-template-fajr.fajr-night [data-sonner-toast],
+html.app-template-fajr.fajr-night [data-sonner-toast] * {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Inputs / textareas / selects again — make sure they win even outside
+   .fajr-root (they were already covered, but a placeholder colour pass
+   helps on date / time inputs). */
+html.app-template-fajr.fajr-night input[type="date"],
+html.app-template-fajr.fajr-night input[type="time"],
+html.app-template-fajr.fajr-night input[type="number"] {
+  color-scheme: dark;
+}
+
+
